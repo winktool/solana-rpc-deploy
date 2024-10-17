@@ -1,0 +1,12 @@
+[Unit]
+Description=Set CPU governor to performance
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower frequency-set --governor performance
+ExecStartPost=/bin/sh -c "echo 'All CPU cores set to performance mode.'"
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
