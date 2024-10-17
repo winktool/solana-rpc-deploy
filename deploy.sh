@@ -91,16 +91,6 @@ chmod -R +r /solana/agave
 chown -R $(whoami) /solana/yellowstone-grpc
 chmod -R +r /solana/yellowstone-grpc
 
-sudo apt-get update \
-&& sudo apt-get install python3-venv git -y \
-&& git clone https://github.com/c29r3/solana-snapshot-finder.git \
-&& cd solana-snapshot-finder \
-&& python3 -m venv venv \
-&& source ./venv/bin/activate \
-&& pip3 install -r requirements.txt
-
-python3 snapshot-finder.py --snapshot_path /solana/ledger
-
 sudo apt install linux-tools-common linux-tools-$(uname -r)
 
 sudo cpupower frequency-info
