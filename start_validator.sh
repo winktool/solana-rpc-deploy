@@ -1,32 +1,53 @@
 #!/bin/bash
+RUST_LOG=info
 
-exec /solana/agave/target/release/agave-validator\
-        --no-voting\
-        --identity /solana/validator_identity.json\
-        --accounts /solana/accounts\
-        --ledger /solana/ledger\
-        --limit-ledger-size\
-        --entrypoint entrypoint.mainnet-beta.solana.com:8001\
-        --entrypoint entrypoint2.mainnet-beta.solana.com:8001\
-        --entrypoint entrypoint3.mainnet-beta.solana.com:8001\
-        --entrypoint entrypoint4.mainnet-beta.solana.com:8001\
-        --entrypoint entrypoint5.mainnet-beta.solana.com:8001\
-        --rpc-port 1100\
-        --no-port-check\
-        --account-index spl-token-owner\
-        --account-index program-id\
-        --log /solana/solana-validator.log\
-        --snapshots /solana/snapshots\
-        --full-rpc-api\
-        --private-rpc\
-        --maximum-local-snapshot-age 2500\
-        --rpc-send-default-max-retries 0\
-        --rpc-send-leader-count 7\
-        --rpc-threads 32\
-        --minimal-snapshot-download-speed 50000000\
-        --account-index-exclude-key kinXdEcpDQeHPEuQnqmUgtYykqKGVFq6CeVX5iAHJq6\
-        --account-index-exclude-key TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA\
-        --account-index-exclude-key TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb\
-        --full-snapshot-interval-slots 10000\
-        --incremental-snapshot-interval-slots 2000\
-        --geyser-plugin-config /solana/yellowstone-grpc/yellowstone-grpc-geyser/config.json
+exec /solana/jito-solana/target/release/agave-validator \
+	--geyser-plugin-config /solana/yellowstone-grpc/yellowstone-grpc-geyser/config.json \
+	--identity /solana/validator_identity.json \
+	--accounts /solana/accounts \
+	--ledger /solana/ledger \
+	--known-validator 138KHwTqKNWGLoo8fK5i8UxYtwoC5tC8o7M9rY1CDEjT \
+	--known-validator HEL1USMZKAL2odpNBj2oCjffnFGaYwmbGmyewGv1e2TU \
+	--known-validator CW9C7HBwAMgqNdXkNgFg9Ujr3edR2Ab9ymEuQnVacd1A \
+	--known-validator Fd7btgySsrjuo25CJCj7oE7VPMyezDhnx7pZkj2v69Nk \
+	--known-validator q9XWcZ7T1wP4bW9SB4XgNNwjnFEJ982nE8aVbbNuwot \
+	--known-validator DWvDTSh3qfn88UoQTEKRV2JnLt5jtJAVoiCo3ivtMwXP \
+	--known-validator EvnRmnMrd69kFdbLMxWkTn1icZ7DCceRhvmb2SJXqDo4 \
+	--known-validator DRpbCBMxVnDK7maPM5tGv6MvB3v1sRMC86PZ8okm21hy \
+	--known-validator 5ikB9XZNVsjwKb6hHT3FS3So1Z1SrDvU5yaniWEQyDEG \
+	--known-validator Awes4Tr6TX8JDzEhCZY2QVNimT6iD1zWHzf1vNyGvpLM \
+	--known-validator 7Zm1pE4FubFYZDyAQ5Labh3A4cxDcvve1s3WCRgEAZ84 \
+	--known-validator GoeW4aFK4dGoekJySgUynWDxBZiQJqm8GDAF4H53tDK9 \
+	--known-validator A4hyMd3FyvUJSRafDUSwtLLaQcxRP4r1BRC9w2AJ1to2 \
+	--known-validator JupRhwjrF5fAcs6dFhLH59r3TJFvbcyLP2NRM8UGH9H \
+	--known-validator CXPeim1wQMkcTvEHx9QdhgKREYYJD8bnaCCqPRwJ1to1 \
+	--entrypoint entrypoint.mainnet-beta.solana.com:8001 \
+	--entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
+	--entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
+	--entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
+	--entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
+	--expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
+	--full-rpc-api \
+	--no-voting \
+	--private-rpc \
+	--gossip-port 8001 \
+	--rpc-port 8899 \
+	--rpc-bind-address 0.0.0.0 \
+	--enable-rpc-transaction-history \
+	--rpc-pubsub-enable-block-subscription \
+	--limit-ledger-size 100000000 \
+	--enable-cpi-and-log-storage \
+	--rpc-threads 64 \
+	--account-index program-id \
+	--account-index spl-token-mint \
+	--account-index spl-token-owner \
+	--rpc-bigtable-timeout 300 \
+	--no-snapshot-fetch \
+	--log /solana/solana-validator.log \
+	--tip-payment-program-pubkey T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt \
+	--tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \
+	--merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \
+	--commission-bps 800 \
+	--relayer-url http://frankfurt.mainnet.relayer.jito.wtf:8100 \
+	--block-engine-url https://frankfurt.mainnet.block-engine.jito.wtf \
+	--shred-receiver-address 145.40.93.84:1002
