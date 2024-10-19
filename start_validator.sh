@@ -35,7 +35,7 @@ exec /solana/jito-solana/target/release/agave-validator \
 	--rpc-bind-address 0.0.0.0 \
 	--enable-rpc-transaction-history \
 	--rpc-pubsub-enable-block-subscription \
-	--limit-ledger-size 100000000 \
+	--limit-ledger-size \
 	--enable-cpi-and-log-storage \
 	--rpc-threads 64 \
 	--account-index program-id \
