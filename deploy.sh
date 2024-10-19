@@ -38,7 +38,7 @@ sudo apt-get install libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cma
 # clone validator
 mkdir /solana
 cd /solana
-git clone https://github.com/jito-foundation/jito-solana.git --recurse-submodules
+git clone https://github.com/anza-xyz/agave
 
 # clone yellowstone-grpc
 # @TODO - this doesn't install all deps for yellowstone
@@ -51,7 +51,7 @@ cp yellowstone-geyser-config.json /solana/yellowstone-grpc/yellowstone-grpc-geys
 bash build-validator.sh $1 $3
 
 # install solana cli tools
-echo 'export PATH="/root/.local/share/solana/install/releases/v2.0.13-jito/bin:$PATH"' >> /root/.profile && source /root/.profile
+echo 'export PATH="/solana/agave/target/release:$PATH"' >> /root/.profile && source /root/.profile
 source /root/.profile
 
 # generate validator identity
@@ -98,18 +98,6 @@ sudo cp cpupower-performance.service /etc/systemd/system/cpupower-performance.se
 sudo systemctl enable cpupower-performance.service
 sudo systemctl stop cpupower-performance.service
 sudo systemctl start cpupower-performance.service
-
-
-sudo apt-get update \
-&& sudo apt-get install python3-venv git -y \
-&& git clone https://github.com/c29r3/solana-snapshot-finder.git \
-&& cd solana-snapshot-finder \
-&& python3 -m venv venv \
-&& source ./venv/bin/activate \
-&& pip3 install -r requirements.txt
-
-
-python3 snapshot-finder.py --snapshot_path /solana/ledger
 
 # start rpc
 sudo systemctl start solana-validator.service
