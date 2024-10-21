@@ -51,7 +51,7 @@ cp yellowstone-geyser-config.json /solana/yellowstone-grpc/yellowstone-grpc-geys
 bash build-validator.sh $1 $3
 
 # install solana cli tools
-echo 'export PATH="/solana/agave/target/release:$PATH"' >> /root/.profile && source /root/.profile
+echo 'export PATH="/solana/agave/target/release/:$PATH"' >> /root/.profile && source /root/.profile
 source /root/.profile
 
 # generate validator identity
@@ -89,6 +89,8 @@ chown -R $(whoami) /solana/agave
 chmod -R +r /solana/agave
 chown -R $(whoami) /solana/yellowstone-grpc
 chmod -R +r /solana/yellowstone-grpc
+sudo chown solana:solana /solana/validator_identity.json
+sudo chmod 600 /solana/validator_identity.json
 
 sudo apt install linux-tools-common linux-tools-$(uname -r)
 
