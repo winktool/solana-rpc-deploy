@@ -50,12 +50,8 @@ cp yellowstone-geyser-config.json /solana/yellowstone-grpc/yellowstone-grpc-geys
 # build validator and yellowstone plugin
 bash build-validator.sh $1 $3
 
-# install solana cli tools
-echo 'export PATH="/solana/agave/target/release/:$PATH"' >> /root/.profile && source /root/.profile
-source /root/.profile
-
 # generate validator identity
-solana-keygen new -o /solana/validator_identity.json
+/solana/agave/target/release/solana-keygen new -o /solana/validator_identity.json
 
 # tune knobs or whatever
 sudo cp sysctl.conf /etc/sysctl.d/21-solana-validator.conf
